@@ -1,20 +1,21 @@
 import sys
-sys.stdin = open("in1.txt", "r")
+input = sys.stdin.readline
 
-if __name__ == "__main__":
-    N = int(input())
-    for _ in range(N):
-        word =input()
-        word = word.upper()
-        i=0
-        j=len(word)-1
-        while True:
-            if i == len(word)-1:
-                print("YES")
-                break
-            if word[i] ==word[j]:
-                i += 1
-                j -= 1
-            else:
-               print("NO")
-               break
+N, M = map(int, input().split())
+A = list(map(int, input().split()))
+
+cnt = 0
+s = 0
+total = 0
+
+for e in range(N):
+    total += A[e]
+
+    while total > M:
+        total -= A[s]
+        s += 1
+
+    if total == M:
+        cnt += 1
+
+print(cnt)
